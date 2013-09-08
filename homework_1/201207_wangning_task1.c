@@ -2,7 +2,7 @@
 	> Function: Find element in array
 	> Author: wangning
 	> Mail: 201207wangning@edu2act.org or winvalx@qq.com
-	> Created Time: 2013-09-08 Sunday 11am34m50s
+	> Created Time: 2013-09-08 Sunday 11:34:50
  ************************************************************************/
 #include <stdio.h>
 #include <stdlib.h>
