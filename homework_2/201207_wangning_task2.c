@@ -111,11 +111,6 @@ int 	IntersectAandB(int *a,int *b,int *aLen,int bLen)
 	pa = a;
 	pc = c;
 
-	c[1] = 1;
-	c[2] = 2;
-	c[3] = 3;
-	c[4] = 4;
-
 	for(i = 0; i < cLen; i++)
 	{
 		*pa++ = *pc++;

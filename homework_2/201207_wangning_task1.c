@@ -79,6 +79,7 @@ int ListIsArithmeticSequence(int *L,int len,int *distance)
 			}
 		}
 		*distance = L[1] - L[0];
+
 		return 1;		
 	}
 }
