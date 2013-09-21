@@ -57,7 +57,7 @@ int main(void)
     返回值： 若合并成功，则返回1，
 			若合并失败，则返回0
     时间复杂度：O(n): n = La.size + Lb.size；
-    空间复杂度：O(1): 辅助空间(8*4)字节
+    空间复杂度：O(n): n = La.size + Lb.size;
 ***************************************************************/
 int 	IntersectAandB(int **a,int *b,int *aLen,int bLen)
 {
