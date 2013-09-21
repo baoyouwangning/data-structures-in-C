@@ -90,29 +90,23 @@ int 	IntersectAandB(int **a,int *b,int *aLen,int bLen)
 
 	while(pa <= pa_last && pb <= pb_last)
 	{
-		if(*pa <= *pb)
+		if(*pa <= *pb && *pa == *(pc-1) )
 		{
-			if( *pa == *(pc-1) )
-			{	
-				pa++;
-			}
-			else
-			{
-				*pc++ = *pa++;
-				cLen++;
-			}
+			pa++;
 		}
-		else
+		else if(*pa <= *pb)
 		{
-			if( *pb == *(pc-1) )
-			{	
-				pb++;
-			}
-			else
-			{
-				*pc++ = *pb++;
-				cLen++;
-			}
+			*pc++ = *pa++;
+			cLen++;
+		}
+		else if( *pb == *(pc-1))
+		{
+			pb++;
+		}
+		else 
+		{
+			*pc++ = *pb++;
+			cLen++;
 		}
 	}
 	while(pa <= pa_last)
