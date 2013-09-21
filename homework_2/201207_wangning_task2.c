@@ -1,5 +1,5 @@
 /*************************************************************************
-	> Function: Check the List Is a Arithmetic Sequence
+	> Function: replace A with merge array A and B
 	> Author: wangning
 	> Mail: 201207wangning@edu2act.org or winvalx@qq.com
 	> Created Time: 2013-09-20 Friday 11:34:50
@@ -7,26 +7,31 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int	IntersectAandB(int *a,int *b,int *aLen,int bLen);
+int	IntersectAandB(int **a,int *b,int *aLen,int bLen);
 
 int main(void)
 {
     //.....
+	int i;
 	int *A;
 	int *B;
-	int aLen = 2;
-	int bLen = 2;
-	int i;
+	int aLen = 5;
+	int bLen = 4;
+	
+	A = (int *)malloc(sizeof(int) * 5);
+	B = (int *)malloc(sizeof(int) * 4);
 
-	A = (int *)malloc(sizeof(int) * 2);
-	B = (int *)malloc(sizeof(int) * 2);
-
-	A[1] = 1;
-	A[2] = 2;
-	B[1] = 3;
+	A[0] = 1;
+	A[1] = 2;
+	A[2] = 3;
+	A[3] = 3;
+	A[4] = 5;
+	B[0] = 3;
+	B[1] = 4;
 	B[2] = 4;
+	B[3] = 6;
 
-	IntersectAandB(A,B,&aLen,bLen);
+	IntersectAandB(&A,B,&aLen,bLen);
 
 	for(i = 0; i < aLen; i++)
 	{
@@ -38,20 +43,23 @@ int main(void)
 }
 
 /***************************************************************
-    º¯Êý¹¦ÄÜ£º²éÕÒ¸ø¶¨ÏßÐÔ±íÖÐµÄÊý¾ÝÔªËØÄÜ·ñ×é³ÉµÈ²îÊýÁÐ(Êý¾ÝÔªËØ¾ùÎªÕûÊý)
-    Ëã·¨Ë¼Ïë£ºÅÐ¶ÏÊý×éµÄ³¤¶È µ±Æä³¤¶ÈÐ¡ÓÚ2Ê±·µ»Ø0£»
-			 µ±Æä³¤¶ÈµÈÓÚ2Ê±£¬Ôò¹¹³ÉµÈ²îÊýÁÐ£¬¹«²î=ºóÒ»Ïî¼õÇ°Ò»Ïî£»
-			 µ±Æä³¤¶È´óÓÚ2Ê±£¬ÔòÒÀ´ÎÅÐ¶ÏL[i] - L[i-1] == L[i-1] - L[i-2] £¿
-			 ³ÉÁ¢Ôò ¹«²î =  L[1] - L[0];
-    º¯Êý²ÎÊý£ºint *L   ´ý¼ì²âÊý×éÖ¸Õë
-             int len   Êý×éÖÐÔªËØ¸öÊý
-             int *distance   ÊýÁÐ¹«²î
-    ·µ»ØÖµ£º  Èô²éÕÒ³É¹¦£¬Ôò¸ødistance¸³Öµ£¬·µ»Ø1£»
-              Èô²éÕÒÊ§°Ü£¬ÔòÖ±½Ó·µ»Ø-1.
-    Ê±¼ä¸´ÔÓ¶È£ºO(n):ÆäÖÐn±íÊ¾Êý×éÖÐÔªËØ¸öÊý
-    ¿Õ¼ä¸´ÔÓ¶È£ºO(1):Ã»ÓÐ¸¨Öú¿Õ¼ä
+    å‡½æ•°åŠŸèƒ½ï¼šåˆå¹¶æ•°ç»„Aå’ŒBçš„äº¤é›†Cå¹¶åˆ©ç”¨Aè¡¨ç©ºé—´å­˜æ”¾Cè¡¨(æ•°æ®å…ƒç´ å‡ä¸ºæ•´æ•°)
+    ç®—æ³•æ€æƒ³ï¼šåˆ¤æ–­æ•°ç»„çš„é•¿åº¦ å½“å…¶é•¿åº¦å°äºŽ1æ—¶è¿”å›ž0ï¼›
+			 å½“å…¶é•¿åº¦å¤§äºŽ1æ—¶ï¼Œå…ˆå¼€è¾ŸA.size+B.sizeçš„ç©ºé—´ç»™Cï¼Œ
+			 ç„¶åŽç”¨ä¸‰ä¸ªæŒ‡é’ˆåˆ†æŒ‡å‘æ•°ç»„Aï¼ŒBï¼ŒCä¾æ¬¡ç§»åŠ¨å¹¶åˆ¤æ–­å¤§å°èµ‹å€¼ç»™æ•°ç»„Cï¼Œ
+			 ç„¶åŽæ ¹æ®è®°å½•çš„Cçš„é•¿åº¦ï¼Œé‡æ–°ç»™Aå¼€è¾Ÿç©ºé—´ï¼Œå¹¶å°†Cä¸­çš„å…ƒç´ éåŽ†èµ‹å€¼ç»™Aï¼Œ
+			 æœ€åŽé‡Šæ”¾ä¸´æ—¶ç©ºé—´Cï¼Œ
+			 è¿”å›ž1
+    å‡½æ•°å‚æ•°ï¼šint **a  æ•°ç»„å˜é‡Açš„åœ°å€ï¼ˆåœ¨å‡½æ•°ä¸­*aè¦æ”¹å˜Açš„æŒ‡å‘ï¼‰
+            int *b   æ•°ç»„å˜é‡BæŒ‡å‘çš„åœ°å€
+			int *aLen æ•°ç»„Aé•¿åº¦çš„å˜é‡çš„æŒ‡é’ˆ
+			int bLen  æ•°ç»„Bçš„é•¿åº¦
+    è¿”å›žå€¼ï¼š è‹¥åˆå¹¶æˆåŠŸï¼Œåˆ™è¿”å›ž1ï¼Œ
+			è‹¥åˆå¹¶å¤±è´¥ï¼Œåˆ™è¿”å›ž0
+    æ—¶é—´å¤æ‚åº¦ï¼šO(n): n = La.size + Lb.sizeï¼›
+    ç©ºé—´å¤æ‚åº¦ï¼šO(1): è¾…åŠ©ç©ºé—´(8*4)å­—èŠ‚
 ***************************************************************/
-int 	IntersectAandB(int *a,int *b,int *aLen,int bLen)
+int 	IntersectAandB(int **a,int *b,int *aLen,int bLen)
 {
 	int *c;
 	int cLen = 0;
@@ -62,23 +70,21 @@ int 	IntersectAandB(int *a,int *b,int *aLen,int bLen)
 	int *pb_last;
 	int i;
 
-	if(*aLen <= 0 || bLen <= 0)
+	if( *aLen <= 0 || bLen <= 0)
 	{
 		return 0;
 	}
 
-	c = (int *)malloc(sizeof(int) * (*aLen + bLen));
+	c = (int *)malloc( sizeof(int) * (*aLen + bLen) );
 	if(!c)
 	{
-		printf("ÄÚ´æ¿ª±ÙÊ§°Ü");
+		printf("å†…å­˜å¼€è¾Ÿå¤±è´¥");
 		return 0;
 	}
-
-	
-	
-	pa = a;
+		
+	pa = *a;
 	pb = b;
-	pa_last = a + *aLen - 1;
+	pa_last = *a + *aLen - 1;
 	pb_last = b + bLen - 1;
 	pc = c;
 
@@ -86,37 +92,63 @@ int 	IntersectAandB(int *a,int *b,int *aLen,int bLen)
 	{
 		if(*pa <= *pb)
 		{
-			*pc++ = *pa++;
-			cLen++;
+			if( *pa == *(pc-1) )
+			{	
+				pa++;
+			}
+			else
+			{
+				*pc++ = *pa++;
+				cLen++;
+			}
 		}
 		else
 		{
-			*pc++ = *pb++;
+			if( *pb == *(pc-1) )
+			{	
+				pb++;
+			}
+			else
+			{
+				*pc++ = *pb++;
+				cLen++;
+			}
+		}
+	}
+	while(pa <= pa_last)
+	{
+		if(*pa == *(pc-1))
+		{
+			pa++;
+		}
+		else 
+		{
+			*pc++ = *pa++;
 			cLen++;
 		}
 	}
-
-	while(pa <= pa_last)
-	{
-		*pc++ = *pa++;
-		cLen++;
-	}
 	while(pb <= pb_last)
 	{
-		*pc++ = *pb++;
-		cLen++;
+		if(*pb == *(pc-1))
+		{
+			pb++;
+		}
+		else 
+		{
+			*pc++ = *pb++;
+			cLen++;
+		}	
 	}
 	
-	a = (int *)realloc(a,sizeof(int) * cLen);
-	pa = a;
+	*a = (int *)realloc(*a,sizeof(int) * cLen);
+	*aLen = cLen;
+	pa = *a;
 	pc = c;
 
 	for(i = 0; i < cLen; i++)
 	{
 		*pa++ = *pc++;
 	}
-
-	*aLen = cLen;
 
 	free(c);
 	return 1;
