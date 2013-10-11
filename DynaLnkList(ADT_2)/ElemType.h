@@ -1,5 +1,5 @@
 /***
-*ElemType.h - ElemTypeµÄ¶¨Òå
+*ElemType.h - ElemTypeçš„å®šä¹‰
 *
 ****/
 

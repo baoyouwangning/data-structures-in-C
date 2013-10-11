@@ -29,18 +29,15 @@
 									void visit(ElemType e);
 
 									#endif
-		  2.
-		  else if('R' == choice)
-		{
-			//void ClearList(LinkList L);
+		  3.In main.c please init like this:
+			LinkList aHead = NULL;
+			
 			ClearList(aHead);
 			aHead = NULL;
 
-			system("pause");   // only for windows
-			system("cls");	 // only for windows
-		}
-
-
+		 4.Hi here:
+		 https://github.com/baoyouwangning/data-structures-in-C/tree/master/DynaLnkList(ADT_2)
+		 your can get this project!
 
 
 *********************************************************************************/
@@ -441,7 +438,7 @@ bool ListInsert(LinkList L, int i, ElemType e)
 
 	if(!L)
 	{
-		printf("链表未初始化！\n");
+		printf("链表未初始化！无法插入\n");
 		return FALSE;
 	}
 	else 
@@ -455,12 +452,12 @@ bool ListInsert(LinkList L, int i, ElemType e)
 		}
 		if(!(j <= i-1))
 		{
-			printf("i小于1,删除位置不存在!\n");
+			printf("i小于1,插入位置不存在!\n");
 			return FALSE;
 		}
 		else if(!p)
 		{
-			printf("插入位置大于当前表长+1,删除位置不存在\n");
+			printf("插入位置大于当前表长+1,插入位置不存在\n");
 			return FALSE;
 		}
 		else
@@ -496,7 +493,7 @@ bool ListDelete(LinkList L, int i, ElemType *e)
 
 	if(!L)
 	{
-		printf("链表未初始化！无需清空\n");
+		printf("链表未初始化！ 无法删除\n");
 		return FALSE;
 	}
 	else 
@@ -508,15 +505,22 @@ bool ListDelete(LinkList L, int i, ElemType *e)
 			p = p -> next;
 			j++;
 		}
-		if(!(p->next) || j > i-1)
+		if( !(j <= i-1) )
 		{
+			printf("i小于1,删除位置不存在!\n");
+			return ERROR;
+		}
+		else if( !(p->next) )
+		{	
+			printf("i大于当前表长,删除位置不存在!\n");
 			return ERROR;
 		}
 		q = p -> next;
 		p -> next = q -> next;
 		*e = q -> data;
 		free(q);
-
+		
+		printf("删除成功! ^_^\n");
 		return OK;
 	}	
 }

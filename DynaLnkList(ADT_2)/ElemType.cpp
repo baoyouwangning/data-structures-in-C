@@ -1,5 +1,5 @@
 /***
-*ElemType.cpp - ElemTypeµÄÊµÏÖ
+*ElemType.cpp - ElemTypeçš„å®ç°
 *	
 ****/
 
